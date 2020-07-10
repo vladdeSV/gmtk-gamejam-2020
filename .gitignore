@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/gmtk-gamejam-2020
+gmtk-gamejam-2020.so
+gmtk-gamejam-2020.dylib
+gmtk-gamejam-2020.dll
+gmtk-gamejam-2020.a
+gmtk-gamejam-2020.lib
+gmtk-gamejam-2020-test-*
+*.exe
+*.o
+*.obj
+*.lst

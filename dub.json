@@ -1,11 +1,9 @@
 {
 	"authors": [
-		"bibbe",
-		"Leo",
-		"Zen“"
+		"Vladimirs Nordholm"
 	],
-	"copyright": "Copyright Â© 2020, bibbe, Leo, Zen“",
-	"description": "a game made in a little less than 48 hours",
+	"copyright": "Copyright Â© 2020, Vladimirs Nordholm",
+	"description": "A minimal D application.",
 	"license": "proprietary",
 	"name": "gmtk-gamejam-2020"
 }

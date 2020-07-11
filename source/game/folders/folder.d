@@ -1,5 +1,11 @@
 module game.folders.folder;
 
+import game.misc;
+import std.file : DirEntry;
+import std.array : array;
+import std.algorithm;
+import game.player;
+
 class Folder
 {
     string name;
@@ -51,9 +57,9 @@ class Folder
         this.children[child.name] = child;
         child.setParent(this);
 
-        import std.stdio;
+        import std.stdio : writeln;
 
-        writeln("added child ", child.parent);
+        writeln("added child for parent", child.parent);
     }
 
     bool isSameAs(Folder other)
@@ -106,5 +112,10 @@ class Folder
 
     void createFiles()
     {
+    }
+
+    auto gameFilesInCurrentDirectory()
+    {
+        return filesInFolder(this.getFolderPath()).filter!(a => a.filenameFromFilePath != Player.name).map!(a => a.name.filenameFromFilePath).array();
     }
 }

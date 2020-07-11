@@ -2,6 +2,9 @@
 	"authors": [
 		"Vladimirs Nordholm"
 	],
+	"stringImportPaths": [
+		"./resource/"
+	],
 	"copyright": "Copyright © 2020, Vladimirs Nordholm",
 	"description": "A minimal D application.",
 	"license": "proprietary",

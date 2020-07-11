@@ -19,6 +19,8 @@ class Player
         writeln("folder is inited: ", currentlyInFolder.inited);
         writeln("folder is visible: ", currentlyInFolder.visible);
         writeln("folder is complted: ", currentlyInFolder.isFolderCompleted());
+
+        writeln("folder has children: ", currentlyInFolder.children);
     }
 
     this(Folder folder)

@@ -1,6 +1,7 @@
 module game.player;
 
 import game.folders.folder;
+import game.misc;
 import std.file : exists;
 import std.stdio : File, rename;
 import std.string : toStringz;
@@ -45,9 +46,9 @@ class Player
         auto to = folder.getFolderPath ~ "\\" ~ Player.name;
         if (this.currentlyInFolder !is folder)
         {
-            if (exists(from))
+            if (exists(from) && exists(to)) 
             {
-                remove(to.toStringz());
+                deleteFile(to);
             }
 
             import core.thread : Thread, msecs;

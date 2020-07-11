@@ -11,6 +11,7 @@ class Folder
     string name;
     bool visible;
     bool inited;
+    bool corrupt;
     Folder parent;
     Folder[string] children;
 
@@ -62,6 +63,7 @@ class Folder
         writeln("added child for parent", child.parent);
     }
 
+/+
     bool isSameAs(Folder other)
     {
         if (this.children.keys != other.children.keys)
@@ -81,6 +83,7 @@ class Folder
 
         return true;
     }
++/
 
     bool isVisible()
     {
@@ -102,6 +105,10 @@ class Folder
         return;
     }
 
+    void onEnterByPlayer()
+    {
+    }
+
     void onCreate()
     {
     }
@@ -116,6 +123,11 @@ class Folder
 
     auto gameFilesInCurrentDirectory()
     {
-        return filesInFolder(this.getFolderPath()).filter!(a => a.filenameFromFilePath != Player.name).map!(a => a.name.filenameFromFilePath).array();
+        return filesInFolder(this.getFolderPath()).filter!(a => a.filenameFromFilePath != Player.name).map!(file => file.name.filenameFromFilePath).array();
+    }
+
+    string pathForFileInCurrentFolder(string filename)
+    {
+        return this.getFolderPath ~ "\\" ~ filename;
     }
 }

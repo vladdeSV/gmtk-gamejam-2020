@@ -1,24 +1,25 @@
 import std.stdio;
 
 import core.thread : Thread, msecs;
-import game.folders.chapta.folder_chapta_1;
+import game.folders.captcha.folder_captcha_robots;
+import game.folders.captcha.folder_captcha_version_one;
+import game.folders.ps.folder_ps_fine;
 import game.folders.folder;
 import game.misc;
 import game.player : Player;
 import std.array : join, split;
 import std.experimental.logger;
-import std.file : mkdirRecurse, DirEntry, rmdirRecurse, exists;
+import std.file : mkdirRecurse, DirEntry, exists;
 import std.string : toStringz;
-		import std.stdio : readln;
-
+import std.stdio : readln;
 
 void main()
 {
-	if (exists(".\\game"))
+	/+if (exists(".\\game"))
 	{
 		writeln("\n aborting!\nfolder 'game' exists. delete this folder, then run the game again.");
 		return;
-	}
+	}+/
 
 	auto start = createGameFolder();
 	createFolderStructure(start);
@@ -28,10 +29,15 @@ void main()
 	bool run = true;
 	while (run)
 	{
+		if(checkPlayerInCorruptFolder(player))
+		{
+			player.moveToFolder(start);
+		}
+
 		checkFolderRec(start);
 		createFolderStructure(start);
 		detectPlayer(start, player);
-		
+	
 		//player.info();
 
 		Thread.sleep(1000.msecs);
@@ -81,7 +87,7 @@ void detectPlayer(Folder root, Player player)
 
 	foreach (DirEntry dirEntry; dirEntries)
 	{
-		if(!exists(dirEntry.name))
+		if (!exists(dirEntry.name))
 		{
 			continue;
 		}
@@ -90,7 +96,7 @@ void detectPlayer(Folder root, Player player)
 
 		if (fileData == Player.data)
 		{
-			if(foundPlayer)
+			if (foundPlayer)
 			{
 				writeln("warning: found multiple players. deleting...");
 				remove(dirEntry.name.toStringz);
@@ -107,16 +113,21 @@ void detectPlayer(Folder root, Player player)
 				writeln("  phys: ", physicalLocation);
 				writeln("  virt: ", virtualLocation);
 
-				Folder sfolder = root.subfolder(dirEntry.name.removePlayerNameFromPath.removeGamePath);
+				Folder sfolder = root.subfolder(
+						dirEntry.name.removePlayerNameFromPath.removeGamePath);
 				if (sfolder is null)
 				{
-					writeln("player is in illigal folder '", dirEntry.name.removePlayerNameFromPath, "'\n  root folder is '", root.getFolderPath(), "'",);
-					writeln("moving player from '", dirEntry.name, "' to '", player.currentlyInFolder.getFolderPath, "'");
+					writeln("player is in illigal folder '", dirEntry.name.removePlayerNameFromPath,
+							"'\n  root folder is '", root.getFolderPath(), "'",);
+					writeln("moving player from '", dirEntry.name, "' to '",
+							player.currentlyInFolder.getFolderPath, "'");
 
 					import std.string : toStringz;
 
-					int renameStatus = rename(dirEntry.name.toStringz(), (player.currentlyInFolder.getFolderPath ~ "\\" ~ Player.name).toStringz());
-					writeln(renameStatus, ": moving player from illigal folder back to current folder");
+					int renameStatus = rename(dirEntry.name.toStringz(),
+							(player.currentlyInFolder.getFolderPath ~ "\\" ~ Player.name).toStringz());
+					writeln(renameStatus,
+							": moving player from illigal folder back to current folder");
 					continue;
 				}
 
@@ -126,12 +137,30 @@ void detectPlayer(Folder root, Player player)
 		}
 	}
 
-	if(!foundPlayer)
+	if (!foundPlayer)
 	{
 		"found no player, generating at last known location".writeln;
 
 		player = new Player(player.currentlyInFolder);
 	}
+}
+
+bool checkPlayerInCorruptFolder(Player player)
+{
+	Folder current = player.currentlyInFolder;
+
+	do
+	{
+		if (current.corrupt)
+		{
+			return true;
+		}
+
+		current = current.parent;
+	}
+	while (current !is null);
+
+	return false;
 }
 
 Folder subfolder(Folder root, string path)
@@ -140,7 +169,8 @@ Folder subfolder(Folder root, string path)
 
 	foreach (string p; path.split("\\"))
 	{
-		if (!curr.hasChildWithName(p)){
+		if (!curr.hasChildWithName(p))
+		{
 			writefln("current folder '%s' does not have child '%s'", curr.getFolderPath, p);
 			writeln("  children: ", curr.children);
 			return null;
@@ -156,8 +186,12 @@ Folder createGameFolder()
 {
 	auto start = new Folder("game", true);
 
-	auto chaptaFolder = new FolderChapta1();
-	start.addChild(chaptaFolder);
+	auto captchaFolder = new FolderCaptchaVersionOne();
+	start.addChild(captchaFolder);
+
+	auto psFolder = new FolderPsFine();
+	psFolder.visible = false;
+	start.addChild(psFolder);
 
 	return start;
 }
@@ -168,6 +202,8 @@ void checkFolderRec(Folder folder)
 	{
 		return;
 	}
+
+	// todo: wrangle name if corrupt
 
 	if (!exists(folder.getFolderPath()))
 	{

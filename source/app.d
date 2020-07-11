@@ -203,7 +203,7 @@ void checkFolderRec(Folder folder)
 		return;
 	}
 
-	// todo: wrangle name if corrupt
+	// todo: wrangle name if folder.corrupt == true
 
 	if (!exists(folder.getFolderPath()))
 	{

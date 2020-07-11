@@ -3,7 +3,8 @@ module game.folders.folder;
 class Folder
 {
     string name;
-    bool visible = true;
+    bool visible;
+    bool inited;
     Folder parent;
     Folder[string] children;
 
@@ -11,20 +12,6 @@ class Folder
     {
         this.name = name;
         this.visible = visible;
-    }
-
-    void onUpdate()
-    {
-
-    }
-
-    void createFiles()
-    {
-    }
-
-    string[] whitelistedFiles()
-    {
-        return [];
     }
 
     string getFolderPath()
@@ -35,6 +22,11 @@ class Folder
         }
 
         return ".\\" ~ this.name;
+    }
+    
+    private void setParent(Folder parent)
+    {
+        this.parent = parent;
     }
 
     Folder getChildWithName(string name)
@@ -60,6 +52,7 @@ class Folder
         child.setParent(this);
 
         import std.stdio;
+
         writeln("added child ", child.parent);
     }
 
@@ -90,11 +83,6 @@ class Folder
 
     void setVisible(bool visible)
     {
-        if (visible)
-        {
-            createFiles();
-        }
-
         this.visible = visible;
     }
 
@@ -112,8 +100,11 @@ class Folder
     {
     }
 
-    private void setParent(Folder parent)
+    void onUpdate()
     {
-        this.parent = parent;
+    }
+
+    void createFiles()
+    {
     }
 }

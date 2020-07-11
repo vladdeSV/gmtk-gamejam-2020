@@ -6,12 +6,15 @@ import game.misc;
 import std.array : array;
 import std.algorithm;
 import std.stdio : File;
+import game.player : Player;
 
 class FolderChapta1 : Folder
 {
+    enum name = "Chapta";
+
     this()
     {
-        super("Chapta", true);
+        super(FolderChapta1.name, true);
     }
 
     override void onCreate()
@@ -24,9 +27,7 @@ class FolderChapta1 : Folder
 
     override bool isFolderCompleted()
     {
-        auto a = filesInFolder(this.getFolderPath()).filter!(a => a != "virus").map!(a => a.name.filenameFromFilePath).array();
-        
-        return a == ["file1.jpg"];
+        return filesInFolder(this.getFolderPath()).map!(a => a.name.filenameFromFilePath).array() == ["file1.jpg", Player.name];
     }
 
     override void onFolderCompleted()

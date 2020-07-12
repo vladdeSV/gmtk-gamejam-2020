@@ -222,9 +222,10 @@ void checkFolderRec(Folder folder)
 
 	folder.onUpdate();
 
-	if (folder.isFolderCompleted())
+	if (!folder.hasCompletedOnce && folder.isFolderCompleted())
 	{
 		folder.onFolderCompleted();
+		folder.hasCompletedOnce = true;
 	}
 
 	foreach (child; folder.children)

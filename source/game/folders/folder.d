@@ -13,7 +13,9 @@ class Folder
     bool visible;
     bool inited;
     bool corrupt;
-    bool visitedByPlayer = false;
+    bool visitedByPlayer;
+    bool hasCompletedOnce;
+
     Folder parent;
     Folder[string] children;
 

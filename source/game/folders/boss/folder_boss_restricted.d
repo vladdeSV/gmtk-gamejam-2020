@@ -21,6 +21,11 @@ class FolderBossRestricted : Folder
     {
         this.parent.parent.parent.corrupt = true;
         this.parent.parent.parent.parent.children[FolderPsFine.name].visible = true;
+
+        import game.audio;
+
+        // todo play error buzz sound
+        Audio.get.playTrack(SongTrack.second);
     }
 
     override bool isFolderCompleted()

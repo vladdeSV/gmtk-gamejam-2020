@@ -10,6 +10,13 @@ class FolderFinaleCore : Folder
     {
         super(this.name);
     }
+    
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication : Communication;
+
+        Communication.get.sayKaren("no... how did you get here. please do not touch me.");
+    }
 
     override void onCreate()
     {

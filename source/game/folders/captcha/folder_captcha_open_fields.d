@@ -8,11 +8,18 @@ import std.algorithm;
 
 class FolderCaptchaOpenFields : Folder
 {
-    enum name = "OpenFields";
+    enum name = "InfectedDreams";
 
     this()
     {
         super(this.name);
+    }
+
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication;
+
+        Communication.get.sayKaren("remove the infected dreams");
     }
 
     override void onCreate()
@@ -29,18 +36,36 @@ class FolderCaptchaOpenFields : Folder
         this.children[FolderBossRestricted.name].visible = true;
     }
 
-
     override bool isFolderCompleted()
     {
         import std.file : exists;
 
-        return !exists(this.pathForFileInCurrentFolder("DELETE"));
+        return !exists(this.pathForFileInCurrentFolder("dream-1.jpg"))
+            && !exists(this.pathForFileInCurrentFolder("dream-2.jpg"))
+            && !exists(this.pathForFileInCurrentFolder("dream-3.jpg"));
     }
 
     override void createFiles()
     {
         import std.stdio : File;
 
-        File(this.pathForFileInCurrentFolder("DELETE"), "w").close();
+        File f;
+        
+        f = File(this.pathForFileInCurrentFolder("dream-1.jpg"), "wb");
+        f.rawWrite(import("dream-1.jpg"));
+        f.close();
+
+        f = File(this.pathForFileInCurrentFolder("dream-2.jpg"), "wb");
+        f.rawWrite(import("dream-2.jpg"));
+        f.close();
+
+        f = File(this.pathForFileInCurrentFolder("dream-3.jpg"), "wb");
+        f.rawWrite(import("dream-3.jpg"));
+        f.close();
+
+        f = File(this.pathForFileInCurrentFolder("dream-4.jpg"), "wb");
+        f.rawWrite(import("dream-4.jpg"));
+        f.close();
+
     }
 }

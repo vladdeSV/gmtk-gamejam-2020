@@ -5,7 +5,7 @@ import game.folders.boss.folder_boss_vital;
 
 class FolderPsDream : Folder
 {
-    enum name = "HopesAndDreams";
+    enum name = "BestMates";
 
     this()
     {
@@ -16,7 +16,7 @@ class FolderPsDream : Folder
     {
         auto filesInDirectory = this.gameFilesInCurrentDirectory().length;
 
-        return filesInDirectory < 3;
+        return filesInDirectory < 4;
     }
 
     override void onFolderCompleted()
@@ -39,16 +39,20 @@ class FolderPsDream : Folder
 
         File file;
 
-        file = File(this.pathForFileInCurrentFolder("Real Life.jpg"), "wb");
-        file.rawWrite(import("dream-1.jpg"));
+        file = File(this.pathForFileInCurrentFolder("Focus Teammate.jpg"), "wb");
+        file.rawWrite(import("mate-1.jpg"));
         file.close();
 
-        file = File(this.pathForFileInCurrentFolder("Not a Dream.jpg"), "wb");
-        file.rawWrite(import("dream-2.jpg"));
+        file = File(this.pathForFileInCurrentFolder("Best Teammate.jpg"), "wb");
+        file.rawWrite(import("mate-2.jpg"));
         file.close();
 
-        file = File(this.pathForFileInCurrentFolder("Can Happen.jpg"), "wb");
-        file.rawWrite(import("dream-3.jpg"));
+        file = File(this.pathForFileInCurrentFolder("Cool Teammate.jpg"), "wb");
+        file.rawWrite(import("mate-3.jpg"));
+        file.close();
+
+        file = File(this.pathForFileInCurrentFolder("Cooler Teammate.jpg"), "wb");
+        file.rawWrite(import("mate-4.jpg"));
         file.close();
     }
 }

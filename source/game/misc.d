@@ -73,3 +73,10 @@ string removePlayerNameFromPath(string path)
 
 	return parts.join("\\");
 }
+
+string gameResourcePath()
+{
+    import std.process : environment;
+
+	return environment.get("APPDATA") ~ "\\out-of-ctrl";
+}

@@ -1,7 +1,7 @@
 module game.folders.word.folder_word_binary;
 
 import game.folders.folder;
-import game.folders.word.folder_word_readme;
+import game.folders.word.folder_word_her_name;
 
 class FolderWordBinary : Folder
 {
@@ -19,14 +19,14 @@ class FolderWordBinary : Folder
 
     override void onFolderCompleted()
     {
-        this.children[FolderWordReadme.name].visible = true;
+        this.children[FolderWordHerName.name].visible = true;
     }
 
     override void onCreate()
     {
         this.createFiles();
 
-        auto c = new FolderWordReadme();
+        auto c = new FolderWordHerName();
         c.visible = false;
         this.addChild(c);
     }

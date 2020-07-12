@@ -8,11 +8,20 @@ import std.array : array;
 
 class FolderCaptchaRobots : Folder
 {
-    enum name = "SelectRobots";
+    enum name = "REEChaptaV2";
 
     this()
     {
         super(FolderCaptchaRobots.name);
+    }
+
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication : Communication;
+
+        Communication.get.sayKaren("remove all images containing robots to continue");
+        Communication.get.pause(1);
+        Communication.get.sayVirus("to reset progress, delete this entire folder");
     }
 
     override void onCreate()
@@ -36,6 +45,12 @@ class FolderCaptchaRobots : Folder
 
     override void createFiles()
     {
+        import std.stdio : File;
+        import std.conv : text;
+        import std.array : split, array;
+        import std.conv : text;
+        import std.algorithm;
+
         enum files = [
             "mug.jpg", //ok
             "human-named-bob.jpg",
@@ -46,20 +61,14 @@ class FolderCaptchaRobots : Folder
             "bob.jpg", // ok
         ];
 
-        import std.stdio : File;
-        import std.conv : text;
-        import std.array : split, array;
-        import std.conv : text;
-        import std.algorithm;
-
-        //File f;
-        //string data;
+        File f;
+        string data;
         static foreach (n, filename; files)
         {
-            mixin(text("File f", n, " = File(text(this.getFolderPath(), \"\\\\file\", n + 1, \".jpg\"), \"wb\");"));
-            mixin(text("auto data", n, " = import(filename);"));
-            mixin(text("f", n, ".rawWrite(data",n,");"));
-            mixin(text("f", n, ".close();"));
+            f = File(this.pathForFileInCurrentFolder(text("\\file", n + 1, ".jpg")), "wb");
+            data = import(filename);
+            f.rawWrite(data);
+            f.close();
         }
     }
 }

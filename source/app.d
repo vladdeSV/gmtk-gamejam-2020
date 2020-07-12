@@ -15,10 +15,14 @@ import std.string : toStringz;
 import std.stdio : readln;
 import std.experimental.logger : sharedLog;
 import game.communication : Communication;
+import game.audio;
 
 void main()
 {
-	sharedLog = new FileLogger(File("log.log", "w+"));
+	initResources();
+	Audio.get.playTrack(SongTrack.first);
+
+	sharedLog = new FileLogger(File(gameResourcePath() ~ "\\log.log", "w+"));
 
 	auto start = createGameFolder();
 	createFolderStructure(start);
@@ -52,7 +56,6 @@ void main()
 
 	Communication.get.pause(1);
 	Communication.get.sayVirus("Found directory '.\\game\\" ~ FolderCaptchaVersionOne.name ~ "'.");
-
 	Communication.get.pause(2);
 	Communication.get.sayKaren("Then let's hope it stays where it is and doesn't move around.");
 
@@ -61,6 +64,7 @@ void main()
 	{
 		if (checkPlayerInCorruptFolder(player))
 		{
+			Communication.get.sayVirus("Current directory is corrupted. Moving to top level directory '" ~ start.getFolderPath() ~ "'.");
 			player.moveToFolder(start);
 		}
 
@@ -243,4 +247,28 @@ void createFolderStructure(Folder folder, string[] pathParts = ["."])
 
 		createFolderStructure(child, pathParts ~ folder.name);
 	}
+}
+
+void initResources()
+{
+	string path = gameResourcePath();
+	path.mkdirRecurse();
+
+	File file;
+	string data;
+
+	file = File(path ~ "\\" ~ SongTrack.first, "wb");
+	data = import("out-of-control-1.ogg");
+	file.rawWrite(data);
+	file.close();
+
+	file = File(path ~ "\\" ~ SongTrack.second, "wb");
+	data = import("out-of-control-2.ogg");
+	file.rawWrite(data);
+	file.close();
+
+	file = File(path ~ "\\" ~ SongTrack.thrid, "wb");
+	data = import("out-of-control-karen.ogg");
+	file.rawWrite(data);
+	file.close();
 }

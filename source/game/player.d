@@ -61,9 +61,18 @@ class Player
 
         if (!folder.inited)
         {
-            Communication.get.sayVirus("Scanning new directory '" ~ this.currentlyInFolder.getFolderPath ~ "\\'");
+            //Communication.get.sayVirus("Scanning new directory '" ~ this.currentlyInFolder.getFolderPath ~ "\\'");
             folder.onCreate();
             folder.inited = true;
+        }
+
+        import game.communication : Communication;
+        import std.conv : text;
+
+        if(!folder.visitedByPlayer)
+        {
+            folder.onFirstTimeEnterByPlayer();
+            folder.visitedByPlayer = true;
         }
     }
 }

@@ -1,7 +1,7 @@
 module game.folders.boss.folder_boss_vital;
 
 import game.folders.folder;
-import game.folders.ps.folder_ps_fine;
+import game.folders.word.folder_word_binary;
 
 class FolderBossVital : Folder
 {
@@ -20,7 +20,7 @@ class FolderBossVital : Folder
     override void onFolderCompleted()
     {
         this.parent.parent.parent.corrupt = true;
-        //todo this.parent.parent.parent.parent.children[Folder__________.name].visible = true;
+        this.parent.parent.parent.parent.children[FolderWordBinary.name].visible = true;
     }
 
     override bool isFolderCompleted()

@@ -13,6 +13,7 @@ class Folder
     bool visible;
     bool inited;
     bool corrupt;
+    bool visitedByPlayer = false;
     Folder parent;
     Folder[string] children;
 
@@ -104,7 +105,7 @@ class Folder
         return;
     }
 
-    void onEnterByPlayer()
+    void onFirstTimeEnterByPlayer()
     {
     }
 

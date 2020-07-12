@@ -17,6 +17,15 @@ class FolderCaptchaVersionOne : Folder
         super(this.name);
     }
 
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication : Communication;
+
+        Communication.get.sayKaren("test 123");
+        Communication.get.pause();
+        Communication.get.sayVirus("i am a virus");
+    }
+
     override void onFolderCompleted()
     {
         this.children[FolderCaptchaRobots.name].visible = true;
@@ -53,9 +62,12 @@ class FolderCaptchaVersionOne : Folder
 
     override void createFiles()
     {
-        File f = File(this.getFolderPath() ~ "\\REECaptchaV1.jpg", "wb");
+        File f = File(this.pathForFileInCurrentFolder("REECaptchaV1.jpg"), "wb");
         auto data = import("remove-kebab.jpg");
         f.rawWrite(data);
+        f.close();
+
+        f = File(this.pathForFileInCurrentFolder("Answer.txt"), "w");
         f.close();
     }
 }

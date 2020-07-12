@@ -5,11 +5,19 @@ import game.folders.finale.folder_finale_core;
 
 class FolderFinaleSystem : Folder
 {
-    enum name = "System";
+    enum name = "KAREN";
 
     this()
     {
         super(this.name);
+    }
+
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication : Communication;
+
+        Communication.get.sayKaren("you cannot go further. i have remove all programs which lead to the 'Core' folder. in here i am safe.");
+        Communication.get.pause(1);
     }
 
     override void onCreate()

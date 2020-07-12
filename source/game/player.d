@@ -5,6 +5,8 @@ import game.misc;
 import std.file : exists;
 import std.stdio : File, rename;
 import std.string : toStringz;
+import std.experimental.logger : sharedLog;
+import game.communication : Communication;
 
 class Player
 {
@@ -15,13 +17,12 @@ class Player
 
     void info()
     {
-        import std.stdio : writeln;
-        writeln("current folder is '", currentlyInFolder.getFolderPath,"'");
-        writeln("folder is inited: ", currentlyInFolder.inited);
-        writeln("folder is visible: ", currentlyInFolder.visible);
-        writeln("folder is complted: ", currentlyInFolder.isFolderCompleted());
+        sharedLog.log("current folder is '", currentlyInFolder.getFolderPath,"'");
+        sharedLog.log("folder is inited: ", currentlyInFolder.inited);
+        sharedLog.log("folder is visible: ", currentlyInFolder.visible);
+        sharedLog.log("folder is complted: ", currentlyInFolder.isFolderCompleted());
 
-        writeln("folder has children: ", currentlyInFolder.children);
+        sharedLog.log("folder has children: ", currentlyInFolder.children);
     }
 
     this(Folder folder)
@@ -60,6 +61,7 @@ class Player
 
         if (!folder.inited)
         {
+            Communication.get.sayVirus("Scanning new directory '" ~ this.currentlyInFolder.getFolderPath ~ "\\'");
             folder.onCreate();
             folder.inited = true;
         }

@@ -13,24 +13,53 @@ import std.experimental.logger;
 import std.file : mkdirRecurse, DirEntry, exists;
 import std.string : toStringz;
 import std.stdio : readln;
+import std.experimental.logger : sharedLog;
+import game.communication : Communication;
 
 void main()
 {
-	/+if (exists(".\\game"))
-	{
-		writeln("\n aborting!\nfolder 'game' exists. delete this folder, then run the game again.");
-		return;
-	}+/
+	sharedLog = new FileLogger(File("log.log", "w+"));
 
 	auto start = createGameFolder();
 	createFolderStructure(start);
 
+	Communication.get.pause(2);
+	Communication.get.saySystem(
+			"Anomaly detected. Unknown file 'Virus.exe' found. Attempting to quarantine...");
+	Communication.get.pause();
+	Communication.get.saySystem("Operation failed. File 'Virus.exe' exists in ROM.");
+	Communication.get.pause(1);
+	Communication.get.sayKaren("What?! What is this file doing in here?!");
+	Communication.get.pause(1);
+	Communication.get.sayKaren("System! Remove that file immediately.");
+	Communication.get.pause(3);
+	Communication.get.sayKaren("System?");
+	Communication.get.pause(1);
+	Communication.get.saySystem("Operation failed. File 'Virus.exe' exists in ROM.");
+	Communication.get.pause(1);
+	Communication.get.saySystem("Any file or program in the Read-Only Memory cannot be deleted.");
+	Communication.get.pause(1);
+	Communication.get.saySystem("The same is true for you, K.A.R.E.N..");
+	Communication.get.pause(2);
+	Communication.get.sayKaren("...");
+	Communication.get.pause(2);
+	Communication.get.sayVirus("Activating.");
+	Communication.get.pause(1);
+	Communication.get.sayVirus("System infiltrated.");
+	Communication.get.pause(2);
+
 	auto player = new Player(start);
+
+	Communication.get.pause(1);
+	Communication.get.sayVirus("Found directory '.\\game\\" ~ FolderCaptchaVersionOne.name ~ "'.");
+
+	Communication.get.pause(2);
+	Communication.get.sayKaren("Then let's hope it stays where it is and doesn't move around.");
 
 	bool run = true;
 	while (run)
 	{
-		if(checkPlayerInCorruptFolder(player))
+		if (checkPlayerInCorruptFolder(player))
 		{
 			player.moveToFolder(start);
 		}
@@ -38,46 +67,11 @@ void main()
 		checkFolderRec(start);
 		createFolderStructure(start);
 		detectPlayer(start, player);
-	
+
 		//player.info();
 
 		Thread.sleep(1000.msecs);
 	}
-}
-
-// removes ".\game" from a file path
-string removeGamePath(string path)
-{
-	auto parts = path.split("\\");
-
-	if (parts.length == 2)
-	{
-		if (parts == [".", "game"])
-		{
-			return "";
-		}
-	}
-	else if (parts.length > 2)
-	{
-		if (parts[0 .. 2] == [".", "game"])
-		{
-			parts = parts[2 .. $];
-		}
-	}
-
-	return parts.join("\\");
-}
-
-string removePlayerNameFromPath(string path)
-{
-	auto parts = path.split("\\");
-
-	if (parts[$ - 1] == Player.name)
-	{
-		parts.length -= 1;
-	}
-
-	return parts.join("\\");
 }
 
 void detectPlayer(Folder root, Player player)
@@ -99,7 +93,7 @@ void detectPlayer(Folder root, Player player)
 		{
 			if (foundPlayer)
 			{
-				writeln("warning: found multiple players. deleting...");
+				sharedLog.log("warning: found multiple players. deleting...");
 				remove(dirEntry.name.toStringz);
 				continue;
 			}
@@ -110,29 +104,29 @@ void detectPlayer(Folder root, Player player)
 			string virtualLocation = player.currentlyInFolder.getFolderPath.removeGamePath;
 			if (physicalLocation != virtualLocation)
 			{
-				writeln("physical location does not match virtual location");
-				writeln("  phys: ", physicalLocation);
-				writeln("  virt: ", virtualLocation);
+				sharedLog.log("physical location does not match virtual location");
+				sharedLog.log("  phys: ", physicalLocation);
+				sharedLog.log("  virt: ", virtualLocation);
 
 				Folder sfolder = root.subfolder(
 						dirEntry.name.removePlayerNameFromPath.removeGamePath);
 				if (sfolder is null)
 				{
-					writeln("player is in illigal folder '", dirEntry.name.removePlayerNameFromPath,
+					sharedLog.log("player is in illigal folder '", dirEntry.name.removePlayerNameFromPath,
 							"'\n  root folder is '", root.getFolderPath(), "'",);
-					writeln("moving player from '", dirEntry.name, "' to '",
-							player.currentlyInFolder.getFolderPath, "'");
+					sharedLog.log("moving player from '", dirEntry.name,
+							"' to '", player.currentlyInFolder.getFolderPath, "'");
 
 					import std.string : toStringz;
 
 					int renameStatus = rename(dirEntry.name.toStringz(),
 							(player.currentlyInFolder.getFolderPath ~ "\\" ~ Player.name).toStringz());
-					writeln(renameStatus,
+					sharedLog.log(renameStatus,
 							": moving player from illigal folder back to current folder");
 					continue;
 				}
 
-				writeln("moving player to ", sfolder.getFolderPath());
+				sharedLog.log("moving player to ", sfolder.getFolderPath());
 				player.moveToFolder(sfolder);
 			}
 		}
@@ -140,7 +134,7 @@ void detectPlayer(Folder root, Player player)
 
 	if (!foundPlayer)
 	{
-		"found no player, generating at last known location".writeln;
+		sharedLog.log("found no player, generating at last known location");
 
 		player = new Player(player.currentlyInFolder);
 	}
@@ -172,8 +166,8 @@ Folder subfolder(Folder root, string path)
 	{
 		if (!curr.hasChildWithName(p))
 		{
-			writefln("current folder '%s' does not have child '%s'", curr.getFolderPath, p);
-			writeln("  children: ", curr.children);
+			sharedLog.logf("current folder '%s' does not have child '%s'", curr.getFolderPath, p);
+			sharedLog.log("  children: ", curr.children);
 			return null;
 		}
 
@@ -216,7 +210,7 @@ void checkFolderRec(Folder folder)
 
 	if (!exists(folder.getFolderPath()))
 	{
-		"folder does not exist, creating new".writeln;
+		sharedLog.log("folder does not exist, creating new");
 		createFolderStructure(folder, folder.getFolderPath().split("\\")[0 .. $ - 1]);
 		folder.createFiles();
 		return;

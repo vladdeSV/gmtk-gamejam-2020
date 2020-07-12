@@ -5,6 +5,7 @@ import std.file : DirEntry;
 import std.array : array;
 import std.algorithm;
 import game.player;
+import std.experimental.logger : sharedLog;
 
 class Folder
 {
@@ -58,9 +59,7 @@ class Folder
         this.children[child.name] = child;
         child.setParent(this);
 
-        import std.stdio : writeln;
-
-        writeln("added child for parent", child.parent);
+        sharedLog.log("added child for parent", child.parent);
     }
 
 /+

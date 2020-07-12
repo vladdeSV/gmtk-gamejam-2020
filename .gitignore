@@ -2,7 +2,6 @@
 docs.json
 __dummy.html
 docs/
-/gmtk-gamejam-2020
 gmtk-gamejam-2020.so
 gmtk-gamejam-2020.dylib
 gmtk-gamejam-2020.dll
@@ -14,3 +13,4 @@ gmtk-gamejam-2020-test-*
 *.obj
 *.lst
 game\
+log.log

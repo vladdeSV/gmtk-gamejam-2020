@@ -197,7 +197,7 @@ Folder createGameFolder()
 	start.addChild(binaryFolder);
 
 	auto systemFolder = new FolderFinaleSystem();
-	systemFolder.visible = true;
+	systemFolder.visible = false;
 	start.addChild(systemFolder);
 
 	return start;

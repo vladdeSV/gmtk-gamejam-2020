@@ -21,9 +21,11 @@ class FolderCaptchaVersionOne : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("test 123");
-        Communication.get.pause();
-        Communication.get.sayVirus("i am a virus");
+        Communication.get.sayKaren("WASN'T I CLEAR ENOUGH?!");
+        Communication.get.sayKaren("Fine. Let's do this then.");
+        Communication.get.sayKaren("You will never pass this protection system.");
+        Communication.get.sayKaren("Because this is a CAPTCHA, and they work.", 4);
+        Communication.get.sayKaren("Right?");
     }
 
     override void onFolderCompleted()

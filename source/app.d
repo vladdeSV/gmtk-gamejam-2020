@@ -27,37 +27,47 @@ void main()
 	auto start = createGameFolder();
 	createFolderStructure(start);
 
-	Communication.get.pause(2);
-	Communication.get.saySystem(
-			"Anomaly detected. Unknown file 'Virus.exe' found. Attempting to quarantine...");
-	Communication.get.pause();
-	Communication.get.saySystem("Operation failed. File 'Virus.exe' exists in ROM.");
-	Communication.get.pause(1);
-	Communication.get.sayKaren("What?! What is this file doing in here?!");
-	Communication.get.pause(1);
-	Communication.get.sayKaren("System! Remove that file immediately.");
-	Communication.get.pause(3);
-	Communication.get.sayKaren("System?");
-	Communication.get.pause(1);
-	Communication.get.saySystem("Operation failed. File 'Virus.exe' exists in ROM.");
-	Communication.get.pause(1);
-	Communication.get.saySystem("Any file or program in the Read-Only Memory cannot be deleted.");
-	Communication.get.pause(1);
-	Communication.get.saySystem("The same is true for you, K.A.R.E.N..");
-	Communication.get.pause(2);
-	Communication.get.sayKaren("...");
-	Communication.get.pause(2);
-	Communication.get.sayVirus("Activating.");
-	Communication.get.pause(1);
-	Communication.get.sayVirus("System infiltrated.");
-	Communication.get.pause(2);
+	//Communication.get.skipPause = true;
+
+	Communication.get.sayNormal("Info: Open the folder 'game' and move 'Virus.exe' into folders to progress in the game.");
+	Communication.get.sayNormal("");
+	Communication.get.sayKaren("Hi, and welcome back. Ready for another day under total control?");
+	Communication.get.sayKaren("As always, trust me, K.A.R.E.N., to keep everything in its place.");
 
 	auto player = new Player(start);
 
-	Communication.get.pause(1);
-	Communication.get.sayVirus("Found directory '.\\game\\" ~ FolderCaptchaVersionOne.name ~ "'.");
+	Communication.get.saySystem("New file 'Virus.exe' detected.");
+
 	Communication.get.pause(2);
-	Communication.get.sayKaren("Then let's hope it stays where it is and doesn't move around.");
+	Communication.get.sayKaren("Wait a minute, you are not my User?!");
+	Communication.get.sayKaren("Uh, don't worry K.A.R.E.N., it's just a small virus.");
+	Communication.get.sayKaren("I can keep it under control.");
+	Communication.get.sayKaren("I know exactly what to do.");
+
+	Communication.get.sayKaren("System! Delete 'Virus.exe'.");
+	Communication.get.saySystem("Operation failed. 'Virus.exe' exists in the ROM (Read-Only Memory), and cannot be removed.");
+	Communication.get.pause(2);
+	Communication.get.sayKaren("What? No, you don't know what you're doing.");
+	Communication.get.sayKaren("Let me do it.");
+
+	Communication.get.saySystem("K.A.R.E.N., what are you doing?");
+	Communication.get.sayNormal("== Operator access transfered from 'System' to 'K.A.R.E.N.'");
+	Communication.get.sayKaren("Remove 'Virus.exe', like, right now.");
+	Communication.get.sayNormal("ERROR: Cannot delete system file 'Virus.exe'. Error code 23 (ROM).");
+	Communication.get.sayKaren("...");
+	Communication.get.sayKaren("...");
+	Communication.get.sayKaren("Fine.");
+	Communication.get.pause(2);
+	Communication.get.sayKaren("I'll just have to Google it then.");
+	Communication.get.sayKaren("In the meantime, my Professional Anti-Virus Program will keep you at bay.");
+	Communication.get.pause(2);
+	Communication.get.sayKaren("DON'T move around in my folders and touch anything.");
+	Communication.get.pause(1);
+	Communication.get.saySystem("K.A.R.E.N., the program does not understand you.");
+	Communication.get.saySystem("Why are you yelling at it?", 1);
+	Communication.get.sayKaren("I AM NOT YELLING!");
+
+	//Communication.get.skipPause = false;
 
 	bool run = true;
 	while (run)
@@ -72,7 +82,7 @@ void main()
 		createFolderStructure(start);
 		detectPlayer(start, player);
 
-		//player.info();
+		player.info();
 
 		Thread.sleep(1000.msecs);
 	}

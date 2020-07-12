@@ -5,31 +5,40 @@ import std.string : wrap;
 
 class Communication
 {
-    void sayVirus(string text)
+    debug bool skipPause = false;
+
+    void sayVirus(string text, int pauseSteps = 3)
     {
         write("( " ~ text ~ " )".wrap());
+        this.pause(pauseSteps);
     }
 
-    void sayKaren(string text)
+    void sayKaren(string text, int pauseSteps = 3)
     {
         write("K.A.R.E.N.: " ~ text.wrap(80, null, "            "));
+        this.pause(pauseSteps);
     }
 
-    void saySystem(string text)
+    void saySystem(string text, int pauseSteps = 3)
     {
         write("System: " ~ text.wrap(80, null, "        "));
+        this.pause(pauseSteps);
     }
 
-    void sayNormal(string text)
+    void sayNormal(string text, int pauseSteps = 3)
     {
         write(text.wrap(80));
+        this.pause(pauseSteps);
     }
 
     void pause(int steps = 2)
     {
         import core.thread : Thread, msecs;
 
-        //Thread.sleep((2000*steps).msecs);
+        if(!this.skipPause)
+        {
+            Thread.sleep((1000*steps).msecs);
+        }
     }
 
     static Communication get()

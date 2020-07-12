@@ -19,7 +19,12 @@ class FolderCaptchaOpenFields : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("remove the infected dreams");
+        Communication.get.sayKaren("Um... System?");
+        Communication.get.saySystem("System is online.");
+        Communication.get.sayKaren("What if it figures out it has to delete all infected images?", 4);
+        Communication.get.saySystem("System is offline.");
+        Communication.get.sayNormal("");
+        Communication.get.sayVirus("To reset the images, delete this entire folder.");
     }
 
     override void onCreate()
@@ -39,6 +44,8 @@ class FolderCaptchaOpenFields : Folder
     override bool isFolderCompleted()
     {
         import std.file : exists;
+
+        import std.stdio : writeln;
 
         return !exists(this.pathForFileInCurrentFolder("dream-1.jpg"))
             && !exists(this.pathForFileInCurrentFolder("dream-2.jpg"))

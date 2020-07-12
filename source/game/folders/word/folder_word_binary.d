@@ -49,8 +49,8 @@ class FolderWordBinary : Folder
         file.write("01000110 01001111 01001100 01000100 01000101 01010010");
         file.close();
 
-        file = File(this.pathForFileInCurrentFolder("SCAB.txt"), "w");
-        file.write("Search. Cloud. ASCII. Binary.");
+        file = File(this.pathForFileInCurrentFolder("Note to self.txt"), "w");
+        file.write("https://www.rapidtables.com/convert/number/binary-to-ascii.html");
         file.close();
     }
 }

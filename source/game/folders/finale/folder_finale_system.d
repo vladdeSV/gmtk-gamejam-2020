@@ -16,7 +16,7 @@ class FolderFinaleSystem : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("you cannot go further. i have remove all programs which lead to the 'Core' folder. in here i am safe.");
+        Communication.get.sayKaren("you cannot go further. i have remove all programs which lead to the 'KAREN\\Core\\' folder. in here i am safe.");
         Communication.get.pause(1);
     }
 
@@ -40,6 +40,10 @@ class FolderFinaleSystem : Folder
 
     override void onFolderCompleted()
     {
+        import game.communication : Communication;
+        
+        Communication.get.sayKaren("No... Don't come in here!");
+
         this.children[FolderFinaleCore.name].visible = true;
     }
 }

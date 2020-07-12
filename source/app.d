@@ -1,8 +1,9 @@
 import std.stdio;
 
 import core.thread : Thread, msecs;
-import game.folders.captcha.folder_captcha_robots;
 import game.folders.captcha.folder_captcha_version_one;
+import game.folders.word.folder_word_binary;
+import game.folders.finale.folder_finale_system;
 import game.folders.ps.folder_ps_fine;
 import game.folders.folder;
 import game.misc;
@@ -192,6 +193,14 @@ Folder createGameFolder()
 	auto psFolder = new FolderPsFine();
 	psFolder.visible = false;
 	start.addChild(psFolder);
+
+	auto binaryFolder = new FolderWordBinary();
+	binaryFolder.visible = false;
+	start.addChild(binaryFolder);
+
+	auto systemFolder = new FolderFinaleSystem();
+	systemFolder.visible = true;
+	start.addChild(systemFolder);
 
 	return start;
 }

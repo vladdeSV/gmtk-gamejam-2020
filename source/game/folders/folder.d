@@ -126,6 +126,11 @@ class Folder
         return filesInFolder(this.getFolderPath()).filter!(a => a.filenameFromFilePath != Player.name).map!(file => file.name.filenameFromFilePath).array();
     }
 
+    auto foldersInCurrentDirectory()
+    {
+        return foldersInFolder(this.getFolderPath()).map!(file => file.name.filenameFromFilePath).array();
+    }
+
     string pathForFileInCurrentFolder(string filename)
     {
         return this.getFolderPath ~ "\\" ~ filename;

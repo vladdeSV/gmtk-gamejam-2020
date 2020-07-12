@@ -9,12 +9,10 @@ DirEntry[] filesInFolder(string folder)
 	return dirEntries(folder, SpanMode.breadth).filter!(a => a.isFile()).array();
 }
 
-/+
 DirEntry[] foldersInFolder(string folder)
 {
 	return dirEntries(folder, SpanMode.breadth).filter!(a => !a.isFile()).array();
 }
-+/
 
 string filenameFromFilePath(string fp)
 {

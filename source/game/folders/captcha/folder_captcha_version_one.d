@@ -45,6 +45,7 @@ class FolderCaptchaVersionOne : Folder
     override bool isFolderCompleted()
     {
         import std.file : exists, readText, FileException;
+        import std.string : strip;
 
         if (!exists(this.getFolderPath ~ "\\Answer.txt"))
         {
@@ -59,7 +60,7 @@ class FolderCaptchaVersionOne : Folder
             return false;
         }
 
-        return readText(this.getFolderPath ~ "\\Answer.txt") == "remove kebab";
+        return readText(this.getFolderPath ~ "\\Answer.txt").strip() == "remove kebab";
     }
 
     override void createFiles()

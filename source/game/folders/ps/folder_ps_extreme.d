@@ -12,6 +12,13 @@ class FolderPsExtreme : Folder
         super(this.name);
     }
     
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication;
+
+        Communication.get.sayKaren("...");
+    }
+    
     override bool isFolderCompleted()
     {
         auto filesInDirectory = this.gameFilesInCurrentDirectory().length;
@@ -21,6 +28,10 @@ class FolderPsExtreme : Folder
 
     override void onFolderCompleted()
     {
+        import game.communication;
+
+        Communication.get.sayKaren("Oh... Did you delete that image because it reminds you of me?");
+
         this.children[FolderPsDream.name].visible = true;
     }
 

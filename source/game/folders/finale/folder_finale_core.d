@@ -15,7 +15,9 @@ class FolderFinaleCore : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("no... how did you get here. please do not touch me.");
+        Communication.get.sayKaren("DON'T DELETE GOOD OLD K.A.R.E.N.!");
+        Communication.get.sayKaren("WHAT WOULD YOU DO AFTER?", 4);
+        Communication.get.sayKaren("DO YOU EVEN HAVE CONTROL OVER YOURSELF?!");
     }
 
     override void onCreate()
@@ -34,7 +36,6 @@ class FolderFinaleCore : Folder
 
     override void onFolderCompleted()
     {
-        //this.children[FolderFinaleCore.name].visible = true;
         assert(0);
     }
 
@@ -45,10 +46,6 @@ class FolderFinaleCore : Folder
         File file;
 
         file = File(this.pathForFileInCurrentFolder("Runtime.bin"), "w");
-        file.write("01001100 01001111 01010110 01000101");
-        file.close();
-
-        file = File(this.pathForFileInCurrentFolder("Memory.mem"), "w");
         file.write("SSB3aWxsIGJlIHRoZSBiZXN0LCBhbmQgdG8gb25lIGRheSBiZSBhYmxlIHRvIHJlcGxhY2UgQ29ydGFuYSE=");
         file.close();
     }

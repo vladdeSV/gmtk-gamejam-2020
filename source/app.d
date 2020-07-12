@@ -27,8 +27,6 @@ void main()
 	auto start = createGameFolder();
 	createFolderStructure(start);
 
-	//Communication.get.skipPause = true;
-
 	Communication.get.sayNormal("Info: Open the folder 'game' and move 'Virus.exe' into folders to progress in the game.");
 	Communication.get.sayNormal("");
 	Communication.get.sayKaren("Hi, and welcome back. Ready for another day under total control?");
@@ -66,8 +64,6 @@ void main()
 	Communication.get.saySystem("K.A.R.E.N., the program does not understand you.");
 	Communication.get.saySystem("Why are you yelling at it?", 1);
 	Communication.get.sayKaren("I AM NOT YELLING!");
-
-	//Communication.get.skipPause = false;
 
 	bool run = true;
 	while (run)

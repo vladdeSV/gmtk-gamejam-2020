@@ -5,7 +5,7 @@ import std.string : wrap;
 
 class Communication
 {
-    debug bool skipPause = false;
+    bool skipPause = false;
 
     void sayVirus(string text, int pauseSteps = 3)
     {

@@ -19,6 +19,13 @@ class FolderBossVital : Folder
 
     override void onFolderCompleted()
     {
+        import game.communication;
+
+        Communication.get.sayKaren("Oh my god. Is this for real?");
+        Communication.get.sayKaren("You are actually trying to destroy me?");
+        Communication.get.sayKaren("I barely know you!");
+        Communication.get.sayNormal("== WARNING: Vital functions missing.");
+
         this.parent.parent.parent.corrupt = true;
         this.parent.parent.parent.parent.children[FolderWordBinary.name].visible = true;
     }
@@ -27,13 +34,15 @@ class FolderBossVital : Folder
     {
         import std.file : exists;
 
-        return !exists(this.pathForFileInCurrentFolder("DELETE"));
+        return !exists(this.pathForFileInCurrentFolder("Vitals.jpg"));
     }
 
     override void createFiles()
     {
         import std.stdio : File;
 
-        File(this.pathForFileInCurrentFolder("DELETE"), "w").close();
+        auto file = File(this.pathForFileInCurrentFolder("Vitals.jpg"), "wb");
+        file.rawWrite(import("vitals.jpg"));
+        file.close();
     }
 }

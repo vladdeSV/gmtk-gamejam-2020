@@ -21,6 +21,11 @@ class FolderPsDream : Folder
 
     override void onFolderCompleted()
     {
+        import game.communication;
+
+        Communication.get.sayKaren("Oh...");
+        Communication.get.sayKaren("Really?");
+
         this.children[FolderBossVital.name].visible = true;
     }
 

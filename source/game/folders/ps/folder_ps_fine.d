@@ -12,6 +12,15 @@ class FolderPsFine : Folder
         super(this.name);
     }
 
+    override void onFirstTimeEnterByPlayer()
+    {
+        import game.communication;
+
+        Communication.get.sayKaren("I made this protection myself, because I am pretty smart.");
+        Communication.get.sayKaren("It requires intelligence to bypass.", 4);
+        Communication.get.sayKaren("You would have to delete the most ridiculous image. Good luck ;)");
+    }
+
     override bool isFolderCompleted()
     {
         auto filesInDirectory = this.gameFilesInCurrentDirectory().length;

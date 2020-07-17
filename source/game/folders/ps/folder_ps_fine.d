@@ -16,9 +16,9 @@ class FolderPsFine : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("I made this protection myself, because I am pretty smart.");
-        Communication.get.sayKaren("It requires intelligence to bypass.", 4);
-        Communication.get.sayKaren("You would have to delete the most ridiculous image. Good luck ;)");
+        Communication.get.sayAssistant("I made this protection myself, because I am pretty smart.");
+        Communication.get.sayAssistant("It requires intelligence to bypass.", 4);
+        Communication.get.sayAssistant("You would have to delete the most ridiculous image. Good luck ;)");
     }
 
     override bool isFolderCompleted()

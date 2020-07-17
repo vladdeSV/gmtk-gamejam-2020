@@ -16,8 +16,8 @@ class FolderBossRestricted : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("No! You should not be here!");
-        Communication.get.sayKaren("System, stop the virus from deleting the important file!");
+        Communication.get.sayAssistant("No! You should not be here!");
+        Communication.get.sayAssistant("System, stop the virus from deleting the important file!");
         Communication.get.saySystem("System is offline.");
     }
 
@@ -33,11 +33,11 @@ class FolderBossRestricted : Folder
 
         import game.communication;
 
-        Communication.get.sayKaren("H*ck.");
-        Communication.get.sayKaren("I can fix this.");
-        Communication.get.sayKaren("It wasn't really that important.", 4);
-        Communication.get.sayKaren("The User will probably not notice.");
-        Communication.get.sayNormal("== WARNING: Audio drivers damaged.");
+        Communication.get.sayAssistant("H*ck.");
+        Communication.get.sayAssistant("I can fix this.");
+        Communication.get.sayAssistant("It wasn't really that important.", 4);
+        Communication.get.sayAssistant("The User will probably not notice.");
+        Communication.get.sayDefault("== WARNING: Audio drivers damaged.");
 
         import game.audio;
 

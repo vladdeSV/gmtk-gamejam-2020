@@ -15,9 +15,9 @@ class FolderFinaleCore : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("DON'T DELETE GOOD OLD K.A.R.E.N.!");
-        Communication.get.sayKaren("WHAT WOULD YOU DO AFTER?", 4);
-        Communication.get.sayKaren("DO YOU EVEN HAVE CONTROL OVER YOURSELF?!");
+        Communication.get.sayAssistant("DON'T DELETE GOOD OLD K.A.R.E.N.!");
+        Communication.get.sayAssistant("WHAT WOULD YOU DO AFTER?", 4);
+        Communication.get.sayAssistant("DO YOU EVEN HAVE CONTROL OVER YOURSELF?!");
     }
 
     override void onCreate()

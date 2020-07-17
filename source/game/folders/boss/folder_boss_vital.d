@@ -21,10 +21,10 @@ class FolderBossVital : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("Oh my god. Is this for real?");
-        Communication.get.sayKaren("You are actually trying to destroy me?");
-        Communication.get.sayKaren("I barely know you!");
-        Communication.get.sayNormal("== WARNING: Vital functions missing.");
+        Communication.get.sayAssistant("Oh my god. Is this for real?");
+        Communication.get.sayAssistant("You are actually trying to destroy me?");
+        Communication.get.sayAssistant("I barely know you!");
+        Communication.get.sayDefault("== WARNING: Vital functions missing.");
 
         this.parent.parent.parent.corrupt = true;
         this.parent.parent.parent.parent.children[FolderWordBinary.name].visible = true;

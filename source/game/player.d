@@ -61,7 +61,7 @@ class Player
 
         if (!folder.inited)
         {
-            //Communication.get.sayVirus("Scanning new directory '" ~ this.currentlyInFolder.getFolderPath ~ "\\'");
+            //Communication.get.sayPlayer("Scanning new directory '" ~ this.currentlyInFolder.getFolderPath ~ "\\'");
             folder.onCreate();
             folder.inited = true;
         }

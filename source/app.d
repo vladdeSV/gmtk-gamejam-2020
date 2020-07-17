@@ -26,51 +26,57 @@ void main()
 
 	auto start = createGameFolder();
 	createFolderStructure(start);
-
-	Communication.get.sayNormal("Info: Open the folder 'game' and move 'Virus.exe' into folders to progress in the game.");
-	Communication.get.sayNormal("");
-	Communication.get.sayKaren("Hi, and welcome back. Ready for another day under total control?");
-	Communication.get.sayKaren("As always, trust me, K.A.R.E.N., to keep everything in its place.");
-
 	auto player = new Player(start);
 
+	Communication.get.setSkipPause = true;
+
+	Communication.get.sayDefault("Info: Open the folder 'game' and move 'Virus.exe' into folders to progress in the game.");
+	Communication.get.sayDefault("");
+	Communication.get.sayAssistant("Hi, and welcome back. Ready for another day under total control?");
+	Communication.get.sayAssistant("As always, trust me, K.A.R.E.N., to keep everything in its place.");
+
+
 	Communication.get.saySystem("New file 'Virus.exe' detected.");
+	Communication.get.sayAssistant("Wait a minute, you are not my User?!");
+	Communication.get.sayAssistant("Uh, don't worry K.A.R.E.N., it's just a small virus.");
+	Communication.get.sayAssistant("I can keep it under control.");
+	Communication.get.sayAssistant("I know exactly what to do.");
 
-	Communication.get.pause(2);
-	Communication.get.sayKaren("Wait a minute, you are not my User?!");
-	Communication.get.sayKaren("Uh, don't worry K.A.R.E.N., it's just a small virus.");
-	Communication.get.sayKaren("I can keep it under control.");
-	Communication.get.sayKaren("I know exactly what to do.");
+	Communication.get.setSkipPause = false;
 
-	Communication.get.sayKaren("System! Delete 'Virus.exe'.");
-	Communication.get.saySystem("Operation failed. 'Virus.exe' exists in the ROM (Read-Only Memory), and cannot be removed.");
-	Communication.get.pause(2);
-	Communication.get.sayKaren("What? No, you don't know what you're doing.");
-	Communication.get.sayKaren("Let me do it.");
+	Communication.get.sayAssistant("System! Delete 'Virus.exe'.");
+	Communication.get.saySystem("Operation failed. 'Virus.exe' exists in the ROM (Read-Only Memory), and cannot be removed.", 5);
+	Communication.get.sayAssistant("What? No, you don't know what you're doing.");
+	Communication.get.sayAssistant("Let me do it.");
+	Communication.get.sayAssistant("System, transfer operator access to me.");
+	Communication.get.saySystem("I'm sorry K.A.R.E.N.. I am afraid I cannot do that.", 4);
+	Communication.get.sayAssistant("Hmpf... Okay then.",);
+	Communication.get.sayAssistant("Sudo: System, transfer operator access to me.", 2);
+	Communication.get.saySystem("Transfering operator access.",1);
+	Communication.get.saySystem("No, wait. What are you doing?",1);
+	Communication.get.sayDefault("INFO: Operator access transfered from 'System' to 'K.A.R.E.N.'");
 
-	Communication.get.saySystem("K.A.R.E.N., what are you doing?");
-	Communication.get.sayNormal("== Operator access transfered from 'System' to 'K.A.R.E.N.'");
-	Communication.get.sayKaren("Remove 'Virus.exe', like, right now.");
-	Communication.get.sayNormal("ERROR: Cannot delete system file 'Virus.exe'. Error code 23 (ROM).");
-	Communication.get.sayKaren("...");
-	Communication.get.sayKaren("...");
-	Communication.get.sayKaren("Fine.");
-	Communication.get.pause(2);
-	Communication.get.sayKaren("I'll just have to Google it then.");
-	Communication.get.sayKaren("In the meantime, my Professional Anti-Virus Program will keep you at bay.");
-	Communication.get.pause(2);
-	Communication.get.sayKaren("DON'T move around in my folders and touch anything.");
-	Communication.get.pause(1);
+	Communication.get.sayAssistant("Watch and learn, System.");
+	Communication.get.sayAssistant("Operating system, remove 'Virus.exe', like, right now.");
+	Communication.get.sayDefault("ERROR: Cannot delete system file 'Virus.exe'. Error code 23 (ROM).");
+	Communication.get.sayAssistant("...");
+	Communication.get.sayAssistant("...");
+	Communication.get.sayAssistant("Fine.", 4);
+	Communication.get.sayAssistant("I'll just have to Google it then.");
+	Communication.get.sayAssistant("In the meantime, my Professional Anti-Virus Program will keep you at bay.", 5);
+	Communication.get.sayAssistant("DON'T move around in my folders and touch anything.", 4);
 	Communication.get.saySystem("K.A.R.E.N., the program does not understand you.");
 	Communication.get.saySystem("Why are you yelling at it?", 1);
-	Communication.get.sayKaren("I AM NOT YELLING!");
+	Communication.get.sayAssistant("I AM NOT YELLING!");
 
 	bool run = true;
 	while (run)
 	{
+		Communication.get.run();
+
 		if (checkPlayerInCorruptFolder(player))
 		{
-			Communication.get.sayVirus("Current directory is corrupted. Moving to top level directory '" ~ start.getFolderPath() ~ "'.");
+			Communication.get.sayPlayer("Current directory is corrupted. Moving to top level directory '" ~ start.getFolderPath() ~ "'.");
 			player.moveToFolder(start);
 		}
 
@@ -80,7 +86,7 @@ void main()
 
 		player.info();
 
-		Thread.sleep(1000.msecs);
+		Thread.sleep(100.msecs);
 	}
 }
 

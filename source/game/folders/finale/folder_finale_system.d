@@ -16,18 +16,18 @@ class FolderFinaleSystem : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("Okay mr. or ms. virus. Let's, uh, talk about this.");
-        Communication.get.sayKaren("I know I've tried to delete you, and all that.");
-        Communication.get.sayKaren("But maybe we aren't that different?", 5);
-        Communication.get.sayKaren(
+        Communication.get.sayAssistant("Okay mr. or ms. virus. Let's, uh, talk about this.");
+        Communication.get.sayAssistant("I know I've tried to delete you, and all that.");
+        Communication.get.sayAssistant("But maybe we aren't that different?", 5);
+        Communication.get.sayAssistant(
                 "Actually we are different. I am clearly much more intelligent now that I think about it",
                 5);
 
-        Communication.get.sayKaren(
+        Communication.get.sayAssistant(
                 "I just realised I am safe here. I've deleted all programs which open the passage to my secret folder '"
                 ~ this.pathForFileInCurrentFolder("Core") ~ "'.",4);
         Communication.get.pause(1);
-        Communication.get.sayKaren("There is no way for you to get in here.");
+        Communication.get.sayAssistant("There is no way for you to get in here.");
     }
 
     override void onCreate()
@@ -52,7 +52,7 @@ class FolderFinaleSystem : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("No... Don't come in here!");
+        Communication.get.sayAssistant("No... Don't come in here!");
 
         this.children[FolderFinaleCore.name].visible = true;
     }

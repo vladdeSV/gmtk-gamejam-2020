@@ -16,7 +16,7 @@ class FolderPsExtreme : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("...");
+        Communication.get.sayAssistant("...");
     }
     
     override bool isFolderCompleted()
@@ -30,7 +30,7 @@ class FolderPsExtreme : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("Oh... Did you delete that image because it reminds you of me?");
+        Communication.get.sayAssistant("Oh... Did you delete that image because it reminds you of me?");
 
         this.children[FolderPsDream.name].visible = true;
     }

@@ -19,13 +19,13 @@ class FolderCaptchaRobots : Folder
     {
         import game.communication : Communication;
 
-        Communication.get.sayKaren("That was lucky.");
-        Communication.get.sayKaren("This CAPTCHA is even harder, because you have to remove all images with machines to continue.");
-        Communication.get.sayKaren("And while you are stuck here, I am going to continue Googling.");
+        Communication.get.sayAssistant("That was lucky.");
+        Communication.get.sayAssistant("This CAPTCHA is even harder, because you have to remove all images with machines to continue.");
+        Communication.get.sayAssistant("And while you are stuck here, I am going to continue Googling.");
 
         Communication.get.pause(1);
-        Communication.get.sayNormal("");
-        Communication.get.sayVirus("To reset the images, delete this entire folder.");
+        Communication.get.sayDefault("");
+        Communication.get.sayPlayer("To reset the images, delete this entire folder.");
     }
 
     override void onCreate()

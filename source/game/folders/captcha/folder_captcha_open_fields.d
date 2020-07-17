@@ -19,12 +19,12 @@ class FolderCaptchaOpenFields : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("Um... System?");
+        Communication.get.sayAssistant("Um... System?");
         Communication.get.saySystem("System is online.");
-        Communication.get.sayKaren("What if it figures out it has to delete all infected images?", 4);
+        Communication.get.sayAssistant("What if it figures out it has to delete all infected images?", 4);
         Communication.get.saySystem("System is offline.");
-        Communication.get.sayNormal("");
-        Communication.get.sayVirus("To reset the images, delete this entire folder.");
+        Communication.get.sayDefault("");
+        Communication.get.sayPlayer("To reset the images, delete this entire folder.");
     }
 
     override void onCreate()

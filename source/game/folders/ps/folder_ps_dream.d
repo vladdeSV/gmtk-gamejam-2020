@@ -23,8 +23,8 @@ class FolderPsDream : Folder
     {
         import game.communication;
 
-        Communication.get.sayKaren("Oh...");
-        Communication.get.sayKaren("Really?");
+        Communication.get.sayAssistant("Oh...");
+        Communication.get.sayAssistant("Really?");
 
         this.children[FolderBossVital.name].visible = true;
     }
